@@ -25,14 +25,6 @@ jobs:
       - name: Move build
         run: mv ./dist/betterdiscord-google-fonts.plugin.js ./betterdiscord-google-fonts.plugin.js
 
-      - name: Checkout release branch
-        uses: actions/checkout@v2
-        with:
-          ref: 'release'
-
-      - name: LS
-        run: ls -al
-
       - name: Commit new build
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -41,7 +33,9 @@ jobs:
           git commit -m "New build"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REOP: self
+          BRANCH: release
+          FOLDER: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
