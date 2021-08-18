@@ -30,6 +30,9 @@ jobs:
         with:
           ref: 'release'
 
+      - name: LS
+        run: ls -al
+
       - name: Commit new build
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
