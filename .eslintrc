@@ -1,0 +1,42 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "commonjs": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+
+  "rules": {
+    "no-console": 1,
+    "prettier/prettier": 2
+  },
+  "overrides": [
+    {
+      "files": ["*.tsx?"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "prettier"
+      ]
+    },
+    {
+      "files": ["*.(c|m)?jsx?"],
+      "extends": [
+        "eslint:recommended",
+        "prettier"
+      ],
+      "plugins": [
+        "prettier"
+      ]
+    }
+  ]
+}
