@@ -37,9 +37,6 @@ jobs:
           git add betterdiscord-google-fonts.plugin.js
           git commit -m "New build"
 
-      - name: Push
-        uses: s0/git-publish-subdir-action
-
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
