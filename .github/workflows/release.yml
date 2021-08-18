@@ -25,14 +25,12 @@ jobs:
       - name: Move build
         run: mv ./dist/betterdiscord-google-fonts.plugin.js ./betterdiscord-google-fonts.plugin.js
 
-      - name: Tester
-        run: ls -al
-
       - name: Commit new build
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "New build" betterdiscord-google-fonts.plugin.js
+          git add betterdiscord-google-fonts.plugin.js
+          git commit -m "New build"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
