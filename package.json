@@ -4,7 +4,8 @@
   "description": "Allows use of Google Fonts through a simple settings UI",
   "scripts": {
     "build": "node esbuild.config.cjs",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "install-plugin": "node install.js"
   },
   "main": "./src/DiscordPlugin.ts",
   "author": {
