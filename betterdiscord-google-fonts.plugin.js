@@ -1,6 +1,6 @@
 /**
  * @name betterdiscord-google-fonts
- * @version 1.0.1
+ * @version 1.0.2
  * @description Allows use of Google Fonts through a simple settings UI
  * @author Mike Orozco
  * @authorLink https://mikeorozco.dev
@@ -13,7 +13,7 @@
 var Global_default = `
 `;
 
-// _26ye18n5x:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/templates/SettingsPanel.html
+// _dn70prxr4:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/templates/SettingsPanel.html
 var SettingsPanel_default = '<div class="google-font-settings">\n  <div class="bd-setting-item">\n    <div class="bd-setting-header">\n      <label for="google-font-select" class="bd-setting-title">Selected Font</label>\n    </div>\n    <div class="bd-select">\n      <div class="bd-select-header-custom">\n        <div class="bd-select-value">{{ CURRENT_FONT }}</div>\n        <svg class="bd-select-arrow" fill="currentColor" viewBox="0 0 24 24">\n          <path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"></path>\n        </svg>\n      </div>\n      <div class="bd-select-options"></div>\n    </div>\n  </div>\n</div>\n';
 
 // sass:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/styles/SettingsPanel.scss
