@@ -7,11 +7,17 @@
  * @authorId 142347724392497152
  */
 
-// _8doi7hobz:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/SettingsPanel.html
+// sass:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/Global.scss
+var Global_default = `
+.bd-addon-list #betterdiscord-google-fonts-card .bd-description {
+  white-space: pre;
+}`;
+
+// _eb93uxrn1:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/SettingsPanel.html
 var SettingsPanel_default = '<div class="google-font-settings">\n  <div class="bd-setting-item">\n    <div class="bd-setting-header">\n      <label for="google-font-select" class="bd-setting-title">Selected Font</label>\n    </div>\n    <div class="bd-select">\n      <div class="bd-select-header-custom">\n        <div class="bd-select-value">{{ CURRENT_FONT }}</div>\n        <svg class="bd-select-arrow" fill="currentColor" viewBox="0 0 24 24">\n          <path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"></path>\n        </svg>\n      </div>\n      <div class="bd-select-options"></div>\n    </div>\n  </div>\n</div>\n';
 
-// sass:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/style.scss
-var style_default = `
+// sass:/home/runner/work/betterdiscord-google-fonts/betterdiscord-google-fonts/src/SettingsPanel.scss
+var SettingsPanel_default2 = `
 .google-font-settings .bd-setting-item .bd-select {
   display: flex;
   flex-direction: column;
@@ -48,7 +54,8 @@ var DiscordPlugin = class {
   async load() {
   }
   async start() {
-    BdApi.injectCSS("bd-google-fonts-global-css", style_default);
+    BdApi.injectCSS("bd-google-fonts-global-css", Global_default);
+    BdApi.injectCSS("bd-google-fonts-settingspanel", SettingsPanel_default2);
     this.fonts = await this.getAvailableFonts();
     this.selectedFont = BdApi.getData("betterdiscord-google-fonts", "font");
     this.updateDomFont();
@@ -56,6 +63,7 @@ var DiscordPlugin = class {
   stop() {
     BdApi.clearCSS("bd-google-fonts-global-css");
     BdApi.clearCSS("bd-google-fonts-custom-font");
+    BdApi.clearCSS("bd-google-fonts-settingspanel");
   }
   async getAvailableFonts() {
     const existingData = BdApi.getData("betterdiscord-google-fonts", "fonts");
