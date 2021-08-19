@@ -1,15 +1,11 @@
-declare module '*.html';
-declare module '*.scss';
-declare global {
-  interface Window {
-    BdApi: any;
-  }
-}
+import { Font } from './FontInterface';
+import { ExtendedWindow } from './ExtendedWindowInterface';
 
-import Font from './FontInterface';
 import globalCSS from './Global.scss';
 import settingsPanelHtml from 'inline:./SettingsPanel.html';
 import settingsPanelCSS from './SettingsPanel.scss';
+
+declare let window: ExtendedWindow;
 
 const BdApi = window.BdApi || {};
 

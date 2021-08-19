@@ -1,4 +1,4 @@
-export default interface Font {
+export interface Font {
   family: String;
   variants: String[];
   subsets: String[];
