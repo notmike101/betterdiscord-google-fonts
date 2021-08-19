@@ -1,6 +1,5 @@
 declare module '*.html';
 declare module '*.scss';
-
 declare global {
   interface Window {
     BdApi: any;
@@ -8,8 +7,9 @@ declare global {
 }
 
 import Font from './FontInterface';
+import globalCSS from './Global.scss';
 import settingsPanelHtml from 'inline:./SettingsPanel.html';
-import cssText from './style.scss';
+import settingsPanelCSS from './SettingsPanel.scss';
 
 const BdApi = window.BdApi || {};
 
@@ -29,7 +29,8 @@ class DiscordPlugin {
   public async load() {}
 
   public async start() {
-    BdApi.injectCSS('bd-google-fonts-global-css', cssText);
+    BdApi.injectCSS('bd-google-fonts-global-css', globalCSS);
+    BdApi.injectCSS('bd-google-fonts-settingspanel', settingsPanelCSS);
     this.fonts = await this.getAvailableFonts();
     this.selectedFont = BdApi.getData('betterdiscord-google-fonts', 'font');
     this.updateDomFont();
@@ -38,6 +39,7 @@ class DiscordPlugin {
   public stop() {
     BdApi.clearCSS('bd-google-fonts-global-css');
     BdApi.clearCSS('bd-google-fonts-custom-font');
+    BdApi.clearCSS('bd-google-fonts-settingspanel');
   }
 
   private async getAvailableFonts(): Promise<string[]> {
