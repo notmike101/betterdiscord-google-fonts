@@ -1,9 +1,9 @@
 import { Font } from './FontInterface';
 import { ExtendedWindow } from './ExtendedWindowInterface';
 
-import globalCSS from './Global.scss';
-import settingsPanelHtml from 'inline:./SettingsPanel.html';
-import settingsPanelCSS from './SettingsPanel.scss';
+import globalCSS from './styles/Global.scss';
+import settingsPanelHtml from 'inline:./templates/SettingsPanel.html';
+import settingsPanelCSS from './styles/SettingsPanel.scss';
 
 declare let window: ExtendedWindow;
 
