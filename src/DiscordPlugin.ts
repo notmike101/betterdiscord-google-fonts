@@ -76,7 +76,7 @@ class DiscordPlugin {
       const newStyle = `
         @import url('https://fonts.googleapis.com/css?family=${this.selectedFont}');
 
-        *:not([class*="hljs"]){
+        *:not([class*="hljs"]):not(code){
           font-family: ${this.selectedFont} !important;
         }
       `;
