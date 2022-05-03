@@ -1,0 +1,17 @@
+.settings-panel {
+  .settings-panel-body {
+    color: var(--text-normal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span {
+      flex: 1;
+    }
+
+    input {
+      display: flex;
+      flex: 1;
+    }
+  }
+}
