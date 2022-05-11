@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => ({
       external: ['react', 'react-dom', 'betterdiscord/bdapi'],
       inlineDynamicImports: true,
       output: {
-        entryFileNames: 'google-fonts.plugin.js',
+        entryFileNames: 'betterdiscord-google-fonts.plugin.js',
         format: 'commonjs',
         manualChunks: () => 'bundle.js',
       },
