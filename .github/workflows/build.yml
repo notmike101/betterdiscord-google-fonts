@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Update google fonts
+        run: npm run update-fonts
+
       - name: Build
         run: npm run build
 
