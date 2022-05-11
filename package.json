@@ -1,10 +1,11 @@
 {
   "name": "google-fonts",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "Injects Google Fonts into Discord",
   "main": "./src/main.ts",
   "scripts": {
     "build": "vite build",
+    "watch": "vite build --watch",
     "install-plugin": "node --experimental-json-modules ./.dev/install.mjs"
   },
   "repository": {
@@ -17,7 +18,9 @@
     "url": "https://mikeorozco.dev"
   },
   "betterdiscord": {
+    "plugin_name": "GoogleFonts",
     "discord_snowflake": "142347724392497152",
+    "author_name": "DeNial",
     "update_url": "https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/release/betterdiscord-google-fonts.plugin.js",
     "source": "https://github.com/notmike101/betterdiscord-google-fonts"
   },
