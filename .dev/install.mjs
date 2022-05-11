@@ -1,12 +1,11 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import pkg from '../package.json' assert { type: 'json' };
 
 function installWindows() {
   const appData = process.env.APPDATA;
   const pluginPath = path.join(appData, 'BetterDiscord', 'plugins');
-  const pluginName = pkg.name + '.plugin.js';
+  const pluginName = 'betterdiscord-google-fonts.plugin.js';
   const compiledPlugin = 'dist/' + pluginName;
 
   if (!fs.existsSync(compiledPlugin)) {
