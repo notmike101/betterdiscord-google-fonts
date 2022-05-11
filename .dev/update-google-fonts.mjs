@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 async function getRemoteFonts() {
   const response = await fetch(
-    'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCfxANDwWkAP3JjzGLv5UOPYcPEwaVAz3k'
+    'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDprsWbtpdexhyLHG6vvSTzH9-dHt-XMEw'
   );
 
   const fonts = await response.json();
