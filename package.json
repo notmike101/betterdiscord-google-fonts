@@ -4,10 +4,12 @@
   "description": "Injects Google Fonts into Discord",
   "main": "./src/main.ts",
   "scripts": {
-    "build": "vite build",
-    "watch": "vite build --watch",
-    "update-fonts": "node .dev/update-google-fonts.mjs",
-    "install-plugin": "node --experimental-json-modules ./.dev/install.mjs"
+    "build": "node ./scripts/build.mjs",
+    "build:dev": "node ./scripts/build.mjs --dev",
+    "watch": "node ./scripts/build.mjs --watch",
+    "watch:dev": "node ./scripts/build.mjs --watch --dev",
+    "update-fonts": "node ./scripts/update-google-fonts.mjs",
+    "install-plugin": "node --experimental-json-modules ./scripts/install.mjs"
   },
   "repository": {
     "type": "git",
@@ -33,11 +35,10 @@
   "dependencies": {
     "@types/bandagedbd__bdapi": "^0.3.4",
     "dotenv": "^16.0.0",
+    "esbuild": "^0.14.38",
+    "esbuild-sass-plugin": "^2.2.6",
     "sass": "^1.51.0",
-    "ts-node": "^10.7.0",
-    "vite": "^2.9.1",
-    "vite-plugin-banner": "^0.2.0",
-    "vite-plugin-externals": "^0.4.0"
+    "ts-node": "^10.7.0"
   },
   "devDependencies": {
     "react": "17.0.2",
