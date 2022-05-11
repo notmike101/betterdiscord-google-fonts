@@ -21,9 +21,6 @@ jobs:
       - name: Update fonts
         run: npm run update-fonts
 
-      - name: Update version
-        run: npm version patch
-
       - name: Push changes
         uses: devops-infra/action-commit-push@master
         with:
