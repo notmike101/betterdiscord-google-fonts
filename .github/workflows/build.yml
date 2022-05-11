@@ -23,9 +23,7 @@ jobs:
         run: npm run build
 
       - name: Cleanup
-        run: |
-          rm ./dist/style.css
-          cp ./src/google-fonts.json ./dist/google-fonts.json
+        run: rm ./dist/style.css
 
       - name: Push changes
         uses: s0/git-publish-subdir-action@develop
