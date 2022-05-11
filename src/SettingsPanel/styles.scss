@@ -2,16 +2,56 @@
   .settings-panel-body {
     color: var(--text-normal);
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    position: relative;
+
+    .settings-panel-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 3px;
+
+      &.border-bottom {
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--text-normal);
+      }
+
+      &.scrollable {
+        overflow-y: auto;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
 
     span {
       flex: 1;
     }
 
-    input {
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .font-list-filter {
       display: flex;
       flex: 1;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    .font-list {
+      height: 200px;
+      width: 100%;
+      background-color: var(--background-color);
+
+      .font-list-item {
+        width: 100%;
+        display: block;
+        cursor: pointer;
+        padding: 2px 0;
+      }
     }
   }
 }

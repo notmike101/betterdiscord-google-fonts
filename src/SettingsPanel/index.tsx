@@ -8,15 +8,29 @@ interface SupportPanelProps {
 
 export const SettingsPanel = (props: SupportPanelProps) => {
   const fonts = props.fonts;
+  const debounceTimer = React.useRef(null);
   const isMounted = React.useRef(false);
   const [ selectedFont, setSelectedFont ] = React.useState(BdApi.getData('betterdiscord-google-fonts', 'selectedFont'));
+  const [ searchFilter, setSearchFilter ] = React.useState('');
 
-  const handleFontChange = (event) => {
-    setSelectedFont(event.currentTarget.value);
+  const handleFontChange = (fontName: string) => {
+    setSelectedFont(fontName);
 
     if (props.fontChangeCallback) {
-      props.fontChangeCallback(event.currentTarget.value);
+      props.fontChangeCallback(fontName);
     }
+  };
+
+  const updateSearchFilter = (event) => {
+    if (debounceTimer.current !== null) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    debounceTimer.current = setTimeout(() => {
+      setSearchFilter(event.target.value);
+
+      debounceTimer.current = null;
+    }, 150);
   };
 
   const mountHandler = () => {
@@ -34,18 +48,29 @@ export const SettingsPanel = (props: SupportPanelProps) => {
     }
 
     return unmountHandler.bind(this);
-  })
+  }, []);
 
   return (
     <div className="settings-panel">
       <div className="settings-panel-body">
-        <span>Active Font:</span>
-        <input type="text" list="font-list" placeholder="Search for a font..." value={selectedFont} onChange={handleFontChange} />
-        <datalist id="font-list">
-          {fonts.map((font) => (
-            <option key={font.family} value={font.family}></option>
-          ))}
-        </datalist>
+        <div className="settings-panel-row border-bottom">
+          <span>Active Font:</span>
+          <p>{ selectedFont }</p>
+        </div>
+        <div className="settings-panel-row">
+          <input className="font-list-filter" type="text" placeholder="Search for a font..." onChange={updateSearchFilter} />
+        </div>
+        <div className="settings-panel-row scrollable">
+          <div className="font-list">
+            {
+            fonts
+              .filter((font: Font) => font.family.includes(searchFilter))
+              .map((font: Font) => (
+                <div className="font-list-item" key={font.family} onClick={() => handleFontChange(font.family) }>{ font.family }</div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   );

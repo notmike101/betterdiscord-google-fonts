@@ -1,10 +1,11 @@
 {
   "name": "google-fonts",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Injects Google Fonts into Discord",
   "main": "./src/main.ts",
   "scripts": {
     "build": "vite build",
+    "watch": "vite build --watch",
     "install-plugin": "node --experimental-json-modules ./.dev/install.mjs"
   },
   "repository": {
