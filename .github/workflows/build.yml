@@ -30,9 +30,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Cleanup
-        run: rm ./dist/style.css
-
       - name: Push changes
         uses: s0/git-publish-subdir-action@develop
         env:

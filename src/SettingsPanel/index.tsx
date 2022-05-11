@@ -47,7 +47,7 @@ export const SettingsPanel = (props: SupportPanelProps) => {
       mountHandler();
     }
 
-    return unmountHandler.bind(this);
+    return unmountHandler;
   }, []);
 
   return (

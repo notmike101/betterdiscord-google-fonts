@@ -1,3 +1,4 @@
+declare module '*.scss';
 declare module 'betterdiscord/bdapi';
 
 interface Font {
