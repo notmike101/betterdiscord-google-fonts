@@ -4,7 +4,7 @@ import pkg from './package.json';
 import path from 'path';
 
 const metaComment = {
-  name: pkg.name,
+  name: pkg.betterdiscord?.plugin_name ?? pkg.name,
   version: pkg.version,
   description: pkg.description,
   author: pkg.author?.name ?? pkg.author,
