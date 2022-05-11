@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "watch": "vite build --watch",
+    "update-fonts": "node .dev/update-google-fonts.mjs",
     "install-plugin": "node --experimental-json-modules ./.dev/install.mjs"
   },
   "repository": {

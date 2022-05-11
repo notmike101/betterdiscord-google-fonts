@@ -1,0 +1,29 @@
+name: Update Google Fonts JSON
+
+on:
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and push to main
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persistent-credential: false
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update fonts
+        run: npm run update-fonts
+
+      - name: Push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "Automated Job: Update ./src/google-fonts.json"
+          target_branch: main
