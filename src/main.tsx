@@ -55,6 +55,8 @@ class Plugin {
 
         :root {
           --font-primary: ${fontName} !important;
+          --font-display: ${fontName} !important;
+          --font-headline: ${fontName} !important;
         }
       `;
 
