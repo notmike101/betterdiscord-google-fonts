@@ -1,9 +1,27 @@
 import esbuild from 'esbuild';
 import { sassPlugin } from 'esbuild-sass-plugin';
-import { metaInfoAsJSComment } from '../betterdiscord.config.mjs';
 import fs from 'fs';
 
 const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+
+export const metaInfo = Object.freeze({
+  version: packageJson.version,
+  source: 'https://github.com/notmike101/betterdiscord-google-fonts',
+  website: 'https://mikeorozco.dev',
+  author: 'DeNial',
+  donate: 'https://buymeacoffee.com/mikeorozcodev',
+  updateUrl: 'https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/release/betterdiscord-google-fonts.plugin.js',
+  authorLink: 'https://mikeorozco.dev',
+  description: packageJson.description,
+  name: 'GoogleFonts',
+  authorId: '142347724392497152',
+});
+
+function metaInfoAsJSComment() {
+  return Object.entries(metaInfo)
+    .filter(([key, value]) => value !== '' && value !== null && value !== undefined)
+    .reduce((acc, [key, value]) => `${acc}\n * @${key} ${value}`, '/**\n') + '\n */\n'
+}
 
 async function main() {
   await esbuild.build({
@@ -15,8 +33,9 @@ async function main() {
       js: metaInfoAsJSComment(),
     },
     define: {
-      'process.env.VERSION': JSON.stringify(packageJson.version),
-      'process.env.DESCRIPTION': JSON.stringify(packageJson.description),
+      PACKAGE_VERSION: JSON.stringify(metaInfo.version),
+      PACKAGE_DESCRIPTION: JSON.stringify(metaInfo.description),
+      BETTERDISCORD_UPDATEURL: JSON.stringify(metaInfo.updateUrl),
     },
     entryPoints: ['./src/main.tsx'],
     outfile: './dist/betterdiscord-google-fonts.plugin.js',

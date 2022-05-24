@@ -1,6 +1,5 @@
 import googleFonts from './google-fonts.json';
 import SettingsPanel from './SettingsPanel';
-import { updateURL, version } from '../betterdiscord.config.mjs';
 import { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
 import { Updater } from 'betterdiscord-plugin-updater';
 
@@ -13,7 +12,7 @@ class Plugin {
   public load() {
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont');
     this.fonts = googleFonts.items ?? [];
-    this.updater = new Updater(updateURL, version);
+    this.updater = new Updater(BETTERDISCORD_UPDATEURL, PACKAGE_VERSION);
   }
 
   public start() {
@@ -31,7 +30,7 @@ class Plugin {
   }
 
   private log(...message): void {
-    console.log(`%c[GoogleFonts]%c (${version})%c ${message.join(' ')}`, 'color: lightblue;', 'color: gray', 'color: white');
+    console.log(`%c[GoogleFonts]%c (${PACKAGE_VERSION})%c ${message.join(' ')}`, 'color: lightblue;', 'color: gray', 'color: white');
   }
 
   private async update(): Promise<void>{
