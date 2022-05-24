@@ -13,14 +13,14 @@ async function main() {
     },
     entryPoints: ['./src/main.tsx'],
     outfile: './dist/betterdiscord-google-fonts.plugin.js',
-    external: ['betterdiscord'],
+    external: ['betterdiscord/bdapi'],
     bundle: true,
     sourcemap: 'inline',
     format: 'cjs',
     target: 'esnext',
     jsx: 'transform',
     logLevel: 'info',
-    minify: !process.argv.slice(2).includes('--dev'),
+    minify: false,
   });
 }
 
