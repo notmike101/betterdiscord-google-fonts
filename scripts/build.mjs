@@ -15,7 +15,7 @@ async function main() {
     outfile: './dist/betterdiscord-google-fonts.plugin.js',
     external: ['betterdiscord/bdapi'],
     bundle: true,
-    sourcemap: 'inline',
+    sourcemap: false,
     format: 'cjs',
     target: 'esnext',
     jsx: 'transform',
