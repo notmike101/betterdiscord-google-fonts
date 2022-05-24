@@ -1,18 +1,24 @@
 import googleFonts from './google-fonts.json';
 import SettingsPanel from './SettingsPanel';
+import { updateURL, version } from '../betterdiscord.config.mjs';
 import { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
+import { Updater } from 'betterdiscord-plugin-updater';
 
 class Plugin {
   public fonts: Font[];
   public selectedFont: string | null;
   public originalFont: string | null;
+  private updater: Updater;
 
   public load() {
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont');
     this.fonts = googleFonts.items ?? [];
+    this.updater = new Updater(updateURL, version);
   }
 
   public start() {
+    this.update();
+
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
 
     this.log('Original font:', this.originalFont);
@@ -24,8 +30,16 @@ class Plugin {
     this.applyFont(null);
   }
 
-  private log(...message) {
-    console.log(`%c[GoogleFonts]%c (v2.0.0)%c ${message.join(' ')}`, 'color: lightblue;', 'color: gray', 'color: white');
+  private log(...message): void {
+    console.log(`%c[GoogleFonts]%c (${version})%c ${message.join(' ')}`, 'color: lightblue;', 'color: gray', 'color: white');
+  }
+
+  private async update(): Promise<void>{
+    const isUpdateAvailable = await this.updater.isUpdateAvailable();
+
+    if (isUpdateAvailable) {
+      this.updater.showUpdateBanner();
+    }
   }
 
   private applyFont(fontName: string): void {
@@ -41,6 +55,8 @@ class Plugin {
 
         :root {
           --font-primary: ${fontName} !important;
+          --font-display: ${fontName} !important;
+          --font-headline: ${fontName} !important;
         }
       `;
 
