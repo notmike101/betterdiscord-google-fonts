@@ -4,6 +4,14 @@ import fs from 'fs';
 
 const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
+if (!packageJson.version) {
+  throw new Error('Unable to read package.json version');
+}
+
+if (!packageJson.description) {
+  throw new Error('Unable to read package.json description');
+}
+
 export const metaInfo = Object.freeze({
   version: packageJson.version,
   source: 'https://github.com/notmike101/betterdiscord-google-fonts',
