@@ -1,6 +1,6 @@
 {
   "name": "google-fonts",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Injects Google Fonts into Discord",
   "main": "./src/main.ts",
   "scripts": {
