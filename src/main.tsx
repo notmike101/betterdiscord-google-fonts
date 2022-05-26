@@ -1,6 +1,6 @@
 import googleFonts from './google-fonts.json';
 import SettingsPanel from './SettingsPanel';
-import { getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
+import { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
 import { Updater } from 'betterdiscord-plugin-updater';
 
 class Plugin {
