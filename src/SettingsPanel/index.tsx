@@ -1,19 +1,20 @@
 import settingStyles from './styles.scss';
 import { React, injectCSS, clearCSS } from 'betterdiscord/bdapi';
+import { EventHandler } from 'react';
 
 interface SupportPanelProps {
   fonts: Font[];
   fontChangeCallback?: any,
 }
 
-export const SettingsPanel = (props: SupportPanelProps) => {
-  const fonts = props.fonts;
+export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
+  const fonts: Font[] = props.fonts;
   const debounceTimer = React.useRef(null);
   const isMounted = React.useRef(false);
   const [ selectedFont, setSelectedFont ] = React.useState(BdApi.getData('betterdiscord-google-fonts', 'selectedFont'));
   const [ searchFilter, setSearchFilter ] = React.useState('');
 
-  const handleFontChange = (fontName: string) => {
+  const handleFontChange = (fontName: string): void => {
     setSelectedFont(fontName);
 
     if (props.fontChangeCallback) {
@@ -21,7 +22,7 @@ export const SettingsPanel = (props: SupportPanelProps) => {
     }
   };
 
-  const updateSearchFilter = (event) => {
+  const updateSearchFilter = (event: any): void => {
     if (debounceTimer.current !== null) {
       clearTimeout(debounceTimer.current);
     }
@@ -33,16 +34,16 @@ export const SettingsPanel = (props: SupportPanelProps) => {
     }, 150);
   };
 
-  const mountHandler = () => {
+  const mountHandler = (): void => {
     isMounted.current = true;
     injectCSS('betterdiscord-google-fonts-settings-panel', settingStyles);
   };
 
-  const unmountHandler = () => {
+  const unmountHandler = (): void => {
     clearCSS('betterdiscord-google-fonts-settings-panel', settingStyles);
   };
 
-  React.useEffect(() => {
+  React.useEffect((): Function => {
     if (isMounted.current === false) {
       mountHandler();
     }
