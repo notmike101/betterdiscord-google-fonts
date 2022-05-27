@@ -24,10 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update google fonts
-        env:
-          GFONT_API_KEY: ${{ secrets.GFONT_API_KEY }}
-        run: npm run update-fonts
+      # - name: Update google fonts
+      #   env:
+      #     GFONT_API_KEY: ${{ secrets.GFONT_API_KEY }}
+      #   run: npm run update-fonts
 
       - name: Build
         run: npm run build
