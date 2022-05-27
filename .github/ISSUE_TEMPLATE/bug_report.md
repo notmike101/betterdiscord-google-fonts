@@ -7,7 +7,7 @@ assignees: notmike101
 
 ---
 
-Notice: If you do not use this template for your issue, it will remain unanswered and automatically be closed
+Notice: If you do not use this template for your issue, it will remain unanswered and be closed.
 
 ----
 
