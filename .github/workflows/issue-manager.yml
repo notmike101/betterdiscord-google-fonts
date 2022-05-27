@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enforce compliance
-        if: |
-          startsWith(github.event.issue.title, '[BUG] ') == 'true' &&
-          contains(github.event.issue.body, 'Notice: If you do not use this template for your issue, it will remain unanswered and automatically be closed') != 'true'
+        if: startsWith(github.event.issue.title, '[BUG]') == 'true' && contains(github.event.issue.body, 'If you do not use this template for your issue, it will remain unanswered and automatically be closed') != 'true'
         uses: peter-evans/close-issue@v2
         with:
           comment: |
