@@ -1,0 +1,15 @@
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  templateComplianceChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - if: startsWith(github.event.issue.title, '[BUG] ') == 'true' && contains(github.event.issue.body, 'Notice: If you do not use this template for your issue, it will remain unanswered and automatically be closed') != 'true'
+        name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          comment: |
+            Issue must use the bug template provided on issue creation.
+            Auto-closing this issue.
