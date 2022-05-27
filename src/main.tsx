@@ -54,8 +54,10 @@ class Plugin {
 
         :root {
           --font-primary: ${fontName} !important;
-          --font-display: ${fontName} !important;
-          --font-headline: ${fontName} !important;
+        }
+
+        *:not([class*="hljs"]):not(code){
+          font-family: var(--font-primary) !important;
         }
       `;
 
