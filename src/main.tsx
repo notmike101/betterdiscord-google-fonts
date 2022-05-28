@@ -10,9 +10,11 @@ class Plugin {
   private updater: Updater;
 
   public load(): void {
-    this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont');
+    this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
     this.fonts = googleFonts.items ?? [];
     this.updater = new Updater(BETTERDISCORD_UPDATEURL, PACKAGE_VERSION);
+
+    this.log('Loaded plugin');
   }
 
   public start(): void {
@@ -20,9 +22,8 @@ class Plugin {
 
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
 
-    this.log('Original font:', this.originalFont);
-
     this.applyFont(this.selectedFont);
+    this.log('Started plugin');
   }
 
   public stop(): void {
@@ -41,15 +42,13 @@ class Plugin {
     }
   }
 
-  private applyFont(fontName: string): void {
-    let style: string = '';
-
+  private applyFont(fontName: string | null): void {
     clearCSS('betterdiscord-google-fonts-customfont');
 
-    if (fontName !== null && fontName !== '') {
+    if (!!fontName) {
       this.log(`Changing font to ${fontName}`);
 
-      style = `
+      const style: string = `
         @import url('https://fonts.googleapis.com/css?family=${fontName}&display=swap');
 
         :root {
@@ -69,6 +68,7 @@ class Plugin {
 
   private fontChangeCallback(fontName: string): void {
     this.selectedFont = fontName;
+
     setData('betterdiscord-google-fonts', 'selectedFont', fontName);
 
     this.applyFont(fontName);
