@@ -52,11 +52,11 @@ class Plugin {
         @import url('https://fonts.googleapis.com/css?family=${fontName}&display=swap');
 
         :root {
-          --font-primary: ${fontName} !important;
+          --font-gfont: ${fontName} !important;
         }
 
         *:not([class*="hljs"]):not(code){
-          font-family: var(--font-primary) !important;
+          font-family: var(--font-gfont) !important;
         }
       `;
 
