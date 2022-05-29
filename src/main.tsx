@@ -1,20 +1,25 @@
 import googleFonts from './google-fonts.json';
 import SettingsPanel from './SettingsPanel';
-import { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
-import { Updater } from 'betterdiscord-plugin-updater';
+import BdAPI, { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
+import { Updater, Logger } from 'betterdiscord-plugin-libs';
 
 class Plugin {
   public fonts: Font[];
   public selectedFont: string | null;
   public originalFont: string | null;
   private updater: Updater;
+  private logger: Logger;
 
   public load(): void {
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
     this.fonts = googleFonts.items ?? [];
-    this.updater = new Updater(BETTERDISCORD_UPDATEURL, PACKAGE_VERSION);
-
-    this.log('Loaded plugin');
+    this.updater = new Updater({
+      BdAPI,
+      currentVersion: PACKAGE_VERSION,
+      updatePath: BETTERDISCORD_UPDATEURL,
+      showToasts: true,
+    });
+    this.logger = new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
   }
 
   public start(): void {
@@ -23,15 +28,10 @@ class Plugin {
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
 
     this.applyFont(this.selectedFont);
-    this.log('Started plugin');
   }
 
   public stop(): void {
     this.applyFont(null);
-  }
-
-  private log(...message: string[]): void {
-    console.log(`%c[GoogleFonts]%c (${PACKAGE_VERSION})%c ${message.join(' ')}`, 'color: lightblue;', 'color: gray', 'color: white');
   }
 
   private async update(): Promise<void>{
@@ -46,7 +46,7 @@ class Plugin {
     clearCSS('betterdiscord-google-fonts-customfont');
 
     if (!!fontName) {
-      this.log(`Changing font to ${fontName}`);
+      this.logger.log(`Changing font to ${fontName}`);
 
       const style: string = `
         @import url('https://fonts.googleapis.com/css?family=${fontName}&display=swap');
@@ -62,7 +62,7 @@ class Plugin {
 
       injectCSS('betterdiscord-google-fonts-customfont', style);
     } else {
-      this.log(`Reverting to original font (${this.originalFont})`);
+      this.logger.log(`Reverting to original font (${this.originalFont})`);
     }
   }
 

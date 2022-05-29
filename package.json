@@ -1,6 +1,6 @@
 {
   "name": "google-fonts",
-  "version": "2.0.14",
+  "version": "2.0.13",
   "description": "Injects Google Fonts into Discord",
   "main": "./src/main.ts",
   "scripts": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/notmike101/betterdiscord-google-fonts",
   "dependencies": {
     "@types/bandagedbd__bdapi": "^0.3.4",
+    "betterdiscord-plugin-libs": "^1.1.2",
     "betterdiscord-plugin-updater": "^1.1.2",
     "esbuild": "^0.14.38",
     "esbuild-sass-plugin": "^2.2.6",
