@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and Publish
+    name: Build and Publish Google Fonts
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,9 +27,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Build
-        run: npm run build
 
       - name: Update google fonts
         env:

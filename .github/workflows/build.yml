@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and Publish
+    name: Build and Publish Plugin
     steps:
       - name: Checkout
         uses: actions/checkout@v3
