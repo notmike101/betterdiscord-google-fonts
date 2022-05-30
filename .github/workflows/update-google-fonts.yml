@@ -1,7 +1,11 @@
-name: Generate a build and publish
+name: Update google fonts
 
 on:
+  schedule:
+    - cron: '*/15 * * * * '
   push:
+    branch:
+      - main
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+*'
 
@@ -27,18 +31,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Update google fonts
+        env:
+          GFONT_API_KEY: ${{ secrets.GFONT_API_KEY }}
+        run: npm run update-fonts
+
       - name: Push changes to release branch
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: release
+          BRANCH: google-fonts-host
           FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create GitHub release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: false
-          files: |
-            dist/betterdiscord-google-fonts.plugin.js
