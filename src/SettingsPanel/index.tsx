@@ -2,12 +2,12 @@ import settingStyles from './styles.scss';
 import { React, injectCSS, clearCSS, getData } from 'betterdiscord/bdapi';
 
 interface SupportPanelProps {
-  fonts: Font[];
+  fonts: string[];
   fontChangeCallback?: any,
 }
 
 export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
-  const fonts: Font[] = props.fonts;
+  const fonts: string[] = props.fonts;
   const debounceTimer = React.useRef(null);
   const isMounted = React.useRef(false);
   const [ selectedFont, setSelectedFont ] = React.useState(getData('betterdiscord-google-fonts', 'selectedFont'));
@@ -65,9 +65,9 @@ export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
           <div className="font-list-item" onClick={() => handleFontChange(null) }>Default</div>
             {
             fonts
-              .filter((font: Font) => font.family.includes(searchFilter))
-              .map((font: Font) => (
-                <div className="font-list-item" key={font.family} onClick={() => handleFontChange(font.family) }>{ font.family }</div>
+              .filter((font: string) => font.includes(searchFilter))
+              .map((font: string) => (
+                <div className="font-list-item" key={font} onClick={() => handleFontChange(font) }>{ font }</div>
               ))
             }
           </div>

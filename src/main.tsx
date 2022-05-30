@@ -1,32 +1,49 @@
-import googleFonts from './google-fonts.json';
 import SettingsPanel from './SettingsPanel';
 import BdAPI, { React, getData, setData, injectCSS, clearCSS } from 'betterdiscord/bdapi';
 import { Updater, Logger } from 'betterdiscord-plugin-libs';
 
 class Plugin {
-  public fonts: Font[];
+  public fonts: string[];
   public selectedFont: string | null;
   public originalFont: string | null;
   private updater: Updater;
   private logger: Logger;
+  private fontFetcher: Promise<any>;
+
+  private async getGoogleFonts(): Promise<void> {
+    try {
+      const res = await fetch('https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/release/google-fonts.json');
+      const fonts = await res.json();
+
+      this.fonts = fonts;
+    } catch (err) {
+      this.logger.error(err.message);
+
+      this.fonts = [];
+    }
+  }
 
   public load(): void {
+    this.logger = new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
-    this.fonts = googleFonts.items ?? [];
     this.updater = new Updater({
       BdAPI,
       currentVersion: PACKAGE_VERSION,
       updatePath: BETTERDISCORD_UPDATEURL,
       showToasts: true,
     });
-    this.logger = new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
+
+    this.fontFetcher = this.getGoogleFonts();
+
+    this.logger.log(this.fonts);
   }
 
-  public start(): void {
+  public async start(): Promise<void> {
     this.update();
 
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
 
+    await this.fontFetcher;
     this.applyFont(this.selectedFont);
   }
 

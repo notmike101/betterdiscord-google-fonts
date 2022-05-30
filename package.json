@@ -29,6 +29,7 @@
     "@types/bandagedbd__bdapi": "^0.3.4",
     "betterdiscord-plugin-libs": "^1.1.2",
     "betterdiscord-plugin-updater": "^1.1.2",
+    "dotenv": "^16.0.1",
     "esbuild": "^0.14.38",
     "esbuild-sass-plugin": "^2.2.6",
     "sass": "^1.51.0",
