@@ -8,7 +8,7 @@ class Plugin {
   public originalFont: string | null;
   private updater: Updater;
   private logger: Logger;
-  private fontFetcher: Promise<any>;
+  private fontFetcher: Promise<void>;
 
   private async getGoogleFonts(): Promise<void> {
     try {
