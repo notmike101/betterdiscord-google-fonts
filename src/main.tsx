@@ -8,7 +8,6 @@ class Plugin {
   public originalFont: string | null;
   private updater: Updater;
   private logger: Logger;
-  private fontFetcher: Promise<void>;
 
   private async getGoogleFonts(): Promise<void> {
     try {
@@ -23,27 +22,20 @@ class Plugin {
     }
   }
 
-  public load(): void {
-    this.logger = new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
-    this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
-    this.updater = new Updater({
-      BdAPI,
-      currentVersion: PACKAGE_VERSION,
-      updatePath: BETTERDISCORD_UPDATEURL,
-      showToasts: true,
-    });
-
-    this.fontFetcher = this.getGoogleFonts();
-
-    this.logger.log(this.fonts);
-  }
+  public load(): void {}
 
   public async start(): Promise<void> {
+    this.logger = this.logger ?? new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
+    this.updater = this.updater ?? new Updater({ BdAPI, currentVersion: PACKAGE_VERSION, updatePath: BETTERDISCORD_UPDATEURL, showToasts: true });
+
+    this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
+  
     this.update();
+
+    await this.getGoogleFonts();
 
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
 
-    await this.fontFetcher;
     this.applyFont(this.selectedFont);
   }
 
