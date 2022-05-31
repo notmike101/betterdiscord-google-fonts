@@ -20,15 +20,14 @@
     "email": "me@mikeorozco.dev",
     "url": "https://mikeorozco.dev"
   },
-  "license": "ISC",
+  "license": "LICENSE.txt",
   "bugs": {
     "url": "https://github.com/notmike101/betterdiscord-google-fonts/issues"
   },
   "homepage": "https://github.com/notmike101/betterdiscord-google-fonts",
   "dependencies": {
     "@types/bandagedbd__bdapi": "^0.3.4",
-    "betterdiscord-plugin-libs": "^1.1.2",
-    "betterdiscord-plugin-updater": "^1.1.2",
+    "betterdiscord-plugin-libs": "^1.2.0",
     "dotenv": "^16.0.1",
     "esbuild": "^0.14.38",
     "esbuild-sass-plugin": "^2.2.6",

@@ -7,7 +7,7 @@ interface SupportPanelProps {
 }
 
 export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
-  const fonts: string[] = props.fonts;
+  let fonts = props.fonts;
   const debounceTimer = React.useRef(null);
   const isMounted = React.useRef(false);
   const [ selectedFont, setSelectedFont ] = React.useState(getData('betterdiscord-google-fonts', 'selectedFont'));
@@ -42,13 +42,19 @@ export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
     clearCSS('betterdiscord-google-fonts-settings-panel', settingStyles);
   };
 
+  const handleFontPropChange = (propFonts): void => {
+    fonts = propFonts;
+  };
+
   React.useEffect((): Function => {
     if (isMounted.current === false) {
       mountHandler();
     }
 
+    handleFontPropChange(props.fonts);
+
     return unmountHandler;
-  }, []);
+  }, [props.fonts]);
 
   return (
     <div className="settings-panel">
@@ -64,11 +70,11 @@ export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
           <div className="font-list">
           <div className="font-list-item" onClick={() => handleFontChange(null) }>Default</div>
             {
-            fonts
-              .filter((font: string) => font.includes(searchFilter))
-              .map((font: string) => (
-                <div className="font-list-item" key={font} onClick={() => handleFontChange(font) }>{ font }</div>
-              ))
+              fonts
+                .filter((font: string) => font.includes(searchFilter))
+                .map((font: string) => (
+                  <div className="font-list-item" key={font} onClick={() => handleFontChange(font) }>{ font }</div>
+                ))
             }
           </div>
         </div>
