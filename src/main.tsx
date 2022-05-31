@@ -1,5 +1,5 @@
 import SettingsPanel from './SettingsPanel';
-import BdAPI, { React, getData, setData, injectCSS, clearCSS, Plugins, showToast } from 'betterdiscord/bdapi';
+import { React, getData, setData, injectCSS, clearCSS, Plugins, showToast } from 'betterdiscord/bdapi';
 import { Updater, Logger, Banners } from 'betterdiscord-plugin-libs';
 
 class Plugin {
