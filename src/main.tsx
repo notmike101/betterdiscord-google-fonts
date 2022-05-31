@@ -14,7 +14,7 @@ class Plugin {
 
   private async getGoogleFonts(): Promise<void> {
     try {
-      const res = await fetch('https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/google-fonts-host/google-fonts.json');
+      const res = await fetch('https://cdn.jsdelivr.net/gh/notmike101/betterdiscord-google-fonts@google-fonts-host/google-fonts.json');
       const fonts = await res.json();
 
       this.fonts = fonts;

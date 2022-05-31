@@ -18,7 +18,7 @@ export const metaInfo = Object.freeze({
   website: 'https://mikeorozco.dev',
   author: 'DeNial',
   donate: 'https://buymeacoffee.com/mikeorozcodev',
-  updateUrl: 'https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/release/betterdiscord-google-fonts.plugin.js',
+  updateUrl: 'https://cdn.jsdelivr.net/gh/notmike101/betterdiscord-google-fonts@release/betterdiscord-google-fonts.plugin.js',
   authorLink: 'https://mikeorozco.dev',
   description: packageJson.description,
   name: 'GoogleFonts',
