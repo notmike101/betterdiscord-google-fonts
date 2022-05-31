@@ -19,7 +19,7 @@ class Plugin {
 
       this.fonts = fonts;
 
-      this.logger.log('Loaded fonts from GitHub', fonts);
+      this.logger.log('Loaded fonts from GitHub');
     } catch (err) {
       this.logger.error(err.message);
 
