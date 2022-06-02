@@ -34,10 +34,10 @@ class Plugin {
     this.modules.app = DiscordModules.app;
   }
 
-  public async load(): Promise<void> {
+  public async start(): Promise<void> {
     this.loadModules();
 
-    this.logger = this.logger ?? new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
+    this.logger = this.logger ?? new Logger('GoogleFonts v' + PACKAGE_VERSION);
     this.updater = this.updater ?? new Updater({
       storagePath: Plugins.folder,
       currentVersion: PACKAGE_VERSION,
@@ -46,10 +46,6 @@ class Plugin {
     this.banners = this.banners ?? new Banners(document.querySelector('.' + this.modules.app.app));
     this.fontLoader = this.getGoogleFonts();
 
-    this.logger.log('Loading Plugin');
-  }
-
-  public async start(): Promise<void> {
     this.logger.log('Starting plugin');
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
     this.originalFont = getComputedStyle(document.documentElement).getPropertyValue('--font-primary').trim();
