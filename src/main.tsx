@@ -1,6 +1,6 @@
 import SettingsPanel from './SettingsPanel';
 import { React, getData, setData, injectCSS, clearCSS, Plugins, showToast } from 'betterdiscord/bdapi';
-import { Updater, Logger, Banners } from 'betterdiscord-plugin-libs';
+import { Updater, Logger, Banners, DiscordModules } from 'betterdiscord-plugin-libs';
 
 class Plugin {
   private updater: Updater;
@@ -11,6 +11,7 @@ class Plugin {
   public originalFont: string | null;
   private fontLoader: Promise<void>;
   private updateBannerId: number;
+  private modules: { [key: string]: any };
 
   private async getGoogleFonts(): Promise<void> {
     try {
@@ -27,14 +28,22 @@ class Plugin {
     }
   }
 
+  private loadModules(): void {
+    this.modules = {};
+
+    this.modules.app = DiscordModules.app;
+  }
+
   public async load(): Promise<void> {
+    this.loadModules();
+
     this.logger = this.logger ?? new Logger('GoogleFonts v' + PACKAGE_VERSION, 'lightblue', 'white');
     this.updater = this.updater ?? new Updater({
       storagePath: Plugins.folder,
       currentVersion: PACKAGE_VERSION,
       updatePath: BETTERDISCORD_UPDATEURL,
     });
-    this.banners = this.banners ?? new Banners(document.querySelector('.' + BdApi.findModuleByProps('app', 'layers').app));
+    this.banners = this.banners ?? new Banners(document.querySelector('.' + this.modules.app.app));
     this.fontLoader = this.getGoogleFonts();
 
     this.logger.log('Loading Plugin');
