@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: '[BUG] '
+title: "[BUG] "
 labels: bug
 assignees: notmike101
 
@@ -15,10 +15,9 @@ Notice: If you do not use this template for your issue, it will remain unanswere
 
 A clear and concise description of what the bug is.
 
-**Are you using the latest version of the plugin?**
+**What version of the plugin are you using?**
 
-- [ ] Yes
-- [ ] No
+v*.*.*
 
 **What have you tried to fix the issue?**
 
