@@ -9,11 +9,13 @@ class Plugin {
   public fonts: string[];
   public selectedFont: string | null;
   public originalFont: string | null;
-  private fontLoader: Promise<void>;
+  private loadingFonts: boolean;
   private updateBannerId: number;
   private modules: { [key: string]: any };
 
   private async getGoogleFonts(): Promise<void> {
+    this.loadingFonts = true;
+
     try {
       const res = await fetch('https://cdn.jsdelivr.net/gh/notmike101/betterdiscord-google-fonts@google-fonts-host/google-fonts.json');
       const fonts = await res.json();
@@ -26,16 +28,14 @@ class Plugin {
 
       this.fonts = [];
     }
-  }
 
-  private loadModules(): void {
-    this.modules = {};
-
-    this.modules.app = DiscordModules.app;
+    this.loadingFonts = false;
   }
 
   public async start(): Promise<void> {
-    this.loadModules();
+    this.modules = {
+      app: DiscordModules.app,
+    };
 
     this.logger = this.logger ?? new Logger('GoogleFonts v' + PACKAGE_VERSION);
     this.updater = this.updater ?? new Updater({
@@ -44,7 +44,6 @@ class Plugin {
       updatePath: BETTERDISCORD_UPDATEURL,
     });
     this.banners = this.banners ?? new Banners(document.querySelector('.' + this.modules.app.app));
-    this.fontLoader = this.getGoogleFonts();
 
     this.logger.log('Starting plugin');
     this.selectedFont = getData('betterdiscord-google-fonts', 'selectedFont') ?? null;
@@ -52,8 +51,7 @@ class Plugin {
   
     this.update();
 
-    await this.fontLoader;
-    this.fontLoader = null;
+    await this.getGoogleFonts();
 
     this.applyFont(this.selectedFont);
   }
@@ -117,9 +115,7 @@ class Plugin {
   }
 
   public getSettingsPanel(): JSX.Element {
-    const isLoadingFonts = this.fontLoader !== null;
-
-    if (isLoadingFonts) {
+    if (this.loadingFonts) {
       return <div style={{ color: 'var(--text-normal)' }}>Font list is still being built, please wait a few minutes and then open this panel again</div>;
     } else {
       return <SettingsPanel fonts={this.fonts} fontChangeCallback={this.fontChangeCallback.bind(this)} />;
