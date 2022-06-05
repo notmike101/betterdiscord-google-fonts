@@ -1,6 +1,6 @@
 /**
 
- * @version 2.2.7
+ * @version 2.2.8
  * @source https://github.com/notmike101/betterdiscord-google-fonts
  * @website https://mikeorozco.dev
  * @author DeNial
@@ -146,7 +146,7 @@ var SettingsPanel = (props) => {
   }, /* @__PURE__ */ import_bdapi.React.createElement("div", {
     className: "font-list-item",
     onClick: () => handleFontChange(null)
-  }, "Default"), fonts.filter((font) => font.includes(searchFilter)).map((font) => /* @__PURE__ */ import_bdapi.React.createElement("div", {
+  }, "Default"), fonts.filter((font) => font.toLowerCase().includes(searchFilter.toLowerCase())).map((font) => /* @__PURE__ */ import_bdapi.React.createElement("div", {
     className: "font-list-item",
     key: font,
     onClick: () => handleFontChange(font)
@@ -1403,10 +1403,10 @@ var Plugin = class {
     this.modules = {
       app: DiscordModules.app
     };
-    this.logger = this.logger ?? new Logger("GoogleFonts v2.2.7");
+    this.logger = this.logger ?? new Logger("GoogleFonts v2.2.8");
     this.updater = this.updater ?? new Updater({
       storagePath: import_bdapi3.Plugins.folder,
-      currentVersion: "2.2.7",
+      currentVersion: "2.2.8",
       updatePath: "https://raw.githubusercontent.com/notmike101/betterdiscord-google-fonts/release/betterdiscord-google-fonts.plugin.js"
     });
     this.banners = this.banners ?? new Banners(document.querySelector("." + this.modules.app.app));
