@@ -71,7 +71,7 @@ export const SettingsPanel = (props: SupportPanelProps): JSX.Element => {
           <div className="font-list-item" onClick={() => handleFontChange(null) }>Default</div>
             {
               fonts
-                .filter((font: string) => font.includes(searchFilter))
+                .filter((font: string) => font.toLowerCase().includes(searchFilter.toLowerCase()))
                 .map((font: string) => (
                   <div className="font-list-item" key={font} onClick={() => handleFontChange(font) }>{ font }</div>
                 ))
